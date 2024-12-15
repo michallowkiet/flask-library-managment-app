@@ -1,25 +1,23 @@
-class Author:
-    def __init__(self, id, name):
-        self.id = id
-        self.name = name
-
-
 class Category:
-    def __init__(self, id, name):
-        self.id = id
+    def __init__(self, name):
+        self.id = -1
         self.name = name
 
 
 class Client:
-    def __init__(self, id, first_name, last_name):
-        self.id = id
+    def __init__(self, first_name, last_name):
+        self._id = -1
         self.first_name = first_name
         self.last_name = last_name
 
+    @property
+    def id(self):
+        return self._id
+
 
 class Book:
-    def __init__(self, id, isbn, name, description, is_loaned, author_id, category_id):
-        self.id = id
+    def __init__(self, isbn, name, description, is_loaned, author_id, category_id):
+        self.id = -1
         self.isbn = isbn
         self.name = name
         self.description = description

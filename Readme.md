@@ -2,6 +2,7 @@
 
 ## Main Features
 
+- Authentication
 - Managing library books (Add, Update, Delete, List, Search)
 - Managing library clients (Add, Update, Delete, List, Search)
 - Managing library categories (Add, Update, Delete, List, Search)
@@ -12,7 +13,7 @@
 
 - Python
 - Flask
-- PostgreSQL
+- PostgreSQL + Active Record
 
 ## Installation
 
