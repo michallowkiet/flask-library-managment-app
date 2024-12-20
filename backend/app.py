@@ -1,26 +1,24 @@
+from db.db import PostgreSQLConnection
 from flask import Flask, jsonify
 from flask_cors import CORS
-from models.author import Author
-from postgresql_connection import PostgreSQLConnection
+from routes.authors import authors
 
 app = Flask(__name__)
+app.register_blueprint(authors)
 CORS(app)
+db = PostgreSQLConnection()
 
 
-@app.route("/", methods=["GET"])
+@app.route("/")
 def index():
-    author = Author(
-        "John Doe",
-        PostgreSQLConnection(),
-    )
-
-    try:
-        author.save()
-    except Exception as e:
-        return jsonify({"error": str(e)})
-
-    return jsonify({"Author ID": author.id})
+    result = db.execute_query("SELECT * FROM author", ())
+    return jsonify([row for row in result])
 
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+# TODO: Add rest of the models Active Record
+# TODO: Add API endpoints using Blueprint
+# TODO: Add error handling
+# TODO: Add authentication

@@ -23,10 +23,14 @@ class PostgreSQLConnection:
         self.connection = psycopg2.connect(**self._connection_config)
         self.cursor = self.connection.cursor()
 
-    def execute_query(self, query, params):
+    def execute_query(self, query, params, is_delete=False):
+
         self.cursor.execute(query, params)
+        self.cursor.rowcount
         self.connection.commit()
-        return self.cursor.fetchall()
+        if is_delete:
+            return None
+        return self.cursor.fetchone()
 
     def close(self):
         self.cursor.close()
